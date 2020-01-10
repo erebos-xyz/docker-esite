@@ -1,4 +1,22 @@
-# Custom dockerignore file for Django
+#> Custom dockerignore file for Docker and Django
+
+# Docker environment
+.env
+
+# Git
+.git/
+.github/
+.gitignore
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+PULL_REQUEST_TEMPLATE.md
+
+# Visual Studio Code
+.vscode
+
+# Django environments
+linux-venv/
+windows-venv/
 
 # Pycache
 __pycache__/
@@ -7,7 +25,7 @@ __pycache__/
 # SQLite
 *.sqlite3
 
-# Custom dockerignore file for esite
+#> Custom dockerignore file for esite
 
 # Audios
 *.ogg
@@ -22,16 +40,5 @@ __pycache__/
 # Fonts
 *.ttf
 
-# Docker
-.env
-
-# Git
-.git/
-.github/
-.gitignore
-CODE_OF_CONDUCT.md
-CONTRIBUTING.md
-PULL_REQUEST_TEMPLATE.md
-
-# DevENV
-dev-venv/
+# SPDX-License-Identifier: (EUPL-1.2)
+# Copyright © 2019 Werbeagentur Christian Aichner
