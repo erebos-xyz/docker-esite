@@ -14,7 +14,7 @@ class UserAdmin(ModelAdmin):
     menu_order = 290
     add_to_settings_menu = False
     exclude_from_explorer = False
-   
+
     # Listed in the user overview
     list_display = ('date_joined', 'username', 'email')
     search_fields = ('date_joined', 'username', 'email')
