@@ -49,6 +49,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [
         path('favicon.ico', favicon),
+        path('robots.txt', robots),
     ]
 
     # Add views for testing 404 and 500 templates
