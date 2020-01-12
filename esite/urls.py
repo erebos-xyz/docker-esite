@@ -31,7 +31,7 @@ from graphene_django.views import GraphQLView
 
 from wagtail.images.views.serve import ServeView
 
-from website.utils.views import favicon, robots
+from esite.utils.views import favicon, robots
 
 urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
