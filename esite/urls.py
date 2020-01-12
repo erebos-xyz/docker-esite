@@ -54,10 +54,10 @@ if settings.DEBUG:
     ]
 
     # Add views for testing 404 and 500 templates
-    urlpatterns += [
-        url(r'^test404/$', TemplateView.as_view(template_name='404.html')),
-        url(r'^test500/$', TemplateView.as_view(template_name='500.html')),
-    ]
+    #urlpatterns += [
+    #    url(r'^test404/$', TemplateView.as_view(template_name='404.html')),
+    #    url(r'^test500/$', TemplateView.as_view(template_name='500.html')),
+    #]
 
 urlpatterns += [
     url(r'', include(wagtail_urls)),
@@ -68,6 +68,10 @@ urlpatterns += [
     url(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
     url(r'^images/([^/]*)/(\d*)/([^/]*)/[^/]*$', ServeView.as_view(), name='wagtailimages_serve'),
 ]
+
+# Error handlers
+handler404 = 'esite.utils.views.page_not_found'
+handler500 = 'esite.utils.views.server_error'
 
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019 Werbeagentur Christian Aichner
