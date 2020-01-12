@@ -31,6 +31,8 @@ from graphene_django.views import GraphQLView
 
 from wagtail.images.views.serve import ServeView
 
+from website.utils.views import favicon, robots
+
 urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
@@ -46,11 +48,7 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [
-        url(
-            r'^favicon\.ico$', RedirectView.as_view(
-                url=settings.STATIC_URL + 'img/favicon.ico'
-                )
-            )
+        path('favicon.ico', favicon),
     ]
 
     # Add views for testing 404 and 500 templates
