@@ -27,6 +27,13 @@ from .base import *
 DEBUG = env.get('DJANGO_DEBUG', 'off') == 'on'
 
 
+#> DEBUG_PROPAGATE_EXCEPTIONS switch
+# SECURITY WARNING: don't run with debug turned on in production!
+# IMPORTANT: Specified in the environment or set to default (off).
+# See https://docs.djangoproject.com/en/2.2/ref/settings/#debug
+DEBUG_PROPAGATE_EXCEPTIONS = env.get('DJANGO_DEBUG_PROPAGATE_EXCEPTIONS', 'off') == 'on'
+
+
 # This is used by Wagtail's email notifications for constructing absolute
 # URLs. Please set to the domain that users will access the admin site.
 if 'PRIMARY_HOST' in env:
