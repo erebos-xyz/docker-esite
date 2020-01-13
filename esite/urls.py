@@ -33,10 +33,14 @@ from graphene_django.views import GraphQLView
 from wagtail.images.views.serve import ServeView
 
 from esite.utils.views import favicon, robots
+from esite.search import views as search_views
 
 urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+
+    # Search cache-control headers are set on the view itself.
+    path('search/', search_views.search, name='search'),
 ]
 
 if settings.DEBUG:

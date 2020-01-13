@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     #'esite.news',
     ##'esite.people',
     #'esite.rss',
-    #'esite.search',
+    'esite.search',
     #'esite.standardpages',
     'esite.utils',
 
