@@ -173,7 +173,6 @@ def PagesQueryMixin():  # noqa: C901
                 query.specific()
             ).live().order_by('path').all()
 
-        @login_required
         def resolve_page(self, info: ResolveInfo, id: int = None, url: str = None, revision: int = None, **_kwargs):
             # session authentication
             #if info.context.user.is_anonymous:
