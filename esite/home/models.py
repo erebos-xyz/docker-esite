@@ -125,7 +125,7 @@ class About_Pages_BoxesBlock(blocks.StructBlock):
     title = blocks.CharBlock(null=True, blank=True, classname="full title", icon='title')
     
     contents = blocks.StreamBlock([
-            ('content', blocks.RichTextBlock(null=True, blank=True, classname="full"))
+        ('content', blocks.RichTextBlock(null=True, blank=True, classname="full"))
     ])
 
     graphql_fields = [GraphQLString("title"), GraphQLString("content"),]
@@ -230,7 +230,7 @@ class Acommunity_Admin_MemberBlock(blocks.StructBlock):
 @register_streamfield_block
 class Acommunity_Admin_MrowBlock(blocks.StructBlock):
     members = blocks.StreamBlock([
-        ('member', Acommunity_Mod_MemberBlock(null=True, blank=False, icon='user'))
+        ('member', Acommunity_Admin_MemberBlock(null=True, blank=False, icon='user'))
     ], required=False)
 
     graphql_fields = [GraphQLStreamfield("members"), ]
