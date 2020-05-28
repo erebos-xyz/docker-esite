@@ -123,7 +123,10 @@ class _S_ShopBlock(blocks.StructBlock):
 @register_streamfield_block
 class About_Pages_BoxesBlock(blocks.StructBlock):
     title = blocks.CharBlock(null=True, blank=True, classname="full title", icon='title')
-    content = blocks.RichTextBlock(null=True, blank=True, classname="full")
+    
+    contents = blocks.StreamBlock([
+            ('content', blocks.RichTextBlock(null=True, blank=True, classname="full"))
+    ])
 
     graphql_fields = [GraphQLString("title"), GraphQLString("content"),]
 
