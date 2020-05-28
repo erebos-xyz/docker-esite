@@ -136,7 +136,7 @@ class About_PagesBlock(blocks.StructBlock):
         ('box', About_Pages_BoxesBlock(null=True, blank=False, icon='doc-full'))
     ], null=True, blank=False)
 
-    graphql_fields = [GraphQLStreamfield("boxes"), GraphQLString("blink"), GraphQLBoolean("use_image"), GraphQLImage("image"), ]
+    graphql_fields = [GraphQLStreamfield("boxes"), GraphQLString("blink"), GraphQLBoolean("use_image"), GraphQLImage("image")]
 
 @register_streamfield_block
 class _S_AboutBlock(blocks.StructBlock):
@@ -178,7 +178,7 @@ class Asharingan_SharinganBlock(blocks.StructBlock):
     sharingan_2 = blocks.RichTextBlock(null=True, blank=False, classname="full")
     sharingan_3 = blocks.RichTextBlock(null=True, blank=False, classname="full")
 
-    graphql_fields = [GraphQLBoolean("show_projects"), GraphQLString("sharingan_1"), GraphQLString("sharingan_2"), GraphQLString("sharingan_3"), ]
+    graphql_fields = [GraphQLBoolean("show_projects"), GraphQLString("sharingan_1"), GraphQLString("sharingan_2"), GraphQLString("sharingan_3")]
 
 @register_streamfield_block
 class _S_AsharinganBlock(blocks.StructBlock):
@@ -196,19 +196,25 @@ class Acommunity_Mod_MemberBlock(blocks.StructBlock):
     pic = ImageChooserBlock(blank=True, classname="full")
     name = blocks.CharBlock(blank=True, max_length=16, default="", classname="full")
 
-    graphql_fields = [GraphQLImage("pic"), GraphQLString("name"), ]
+    graphql_fields = [GraphQLImage("pic"), GraphQLString("name")]
+
+@register_streamfield_block
+class Acommunity_Mod_MrowBlock(blocks.StructBlock):
+    members = blocks.StreamBlock([
+        ('member', Acommunity_Mod_MemberBlock(null=True, blank=False, icon='user'))
+    ], required=False)
+
+    graphql_fields = [GraphQLStreamfield("members"), ]
 
 @register_streamfield_block
 class Acommunity_ModBlock(blocks.StructBlock):
     show_mods = blocks.BooleanBlock(default=True, help_text="Whether the mods will be shown on this block", required=False, classname="full")
     mods_title = blocks.CharBlock(max_length=16, default="Mods", classname="full")
-    # members = blocks.StreamBlock([
-    #     mrow = blocks.StreamBlock([
-    #         member = Acommunity_Mod_MemberBlock(null=True, blank=False, icon='user')
-    #     ], icon='group', )
-    # ], required=False)
+    mrows = blocks.StreamBlock([
+         ('mrow',Acommunity_Mod_MrowBlock(blank=False, null=True, ))
+     ], required=False)
 
-    graphql_fields = [GraphQLBoolean("show_mods"), GraphQLString("mods_title"), ]#GraphQLStreamfield("members"), GraphQLStreamfield("mrow"), ]
+    graphql_fields = [GraphQLBoolean("show_mods"), GraphQLString("mods_title"), GraphQLStreamfield("mrows")]
 
 @register_streamfield_block
 class Acommunity_Admin_MemberBlock(blocks.StructBlock):
@@ -216,19 +222,25 @@ class Acommunity_Admin_MemberBlock(blocks.StructBlock):
     name = blocks.CharBlock(blank=True, max_length=16, default="", classname="full")
     description = blocks.CharBlock(max_length=128, default="", classname="full")
 
-    graphql_fields = [GraphQLImage("pic"), GraphQLString("name"), GraphQLString("description"), ]
+    graphql_fields = [GraphQLImage("pic"), GraphQLString("name"), GraphQLString("description")]
+
+@register_streamfield_block
+class Acommunity_Admin_MrowBlock(blocks.StructBlock):
+    members = blocks.StreamBlock([
+        ('member', Acommunity_Mod_MemberBlock(null=True, blank=False, icon='user'))
+    ], required=False)
+
+    graphql_fields = [GraphQLStreamfield("members"), ]
 
 @register_streamfield_block
 class Acommunity_AdminBlock(blocks.StructBlock):
     show_admins = blocks.BooleanBlock(default=True, help_text="Whether the admins will be shown on this block", required=False, classname="full")
     admins_title = blocks.CharBlock(max_length=16, default="Admins", classname="full")
-    # members = blocks.StreamBlock([,
-    #     mrow = blocks.StreamBlock([
-    #         member = Acommunity_Admin_MemberBlock(null=True, blank=False , icon='user')
-    #     ], icon='group',)
-    # ])
+    mrows = blocks.StreamBlock([
+         ('mrow',Acommunity_Admin_MrowBlock(blank=False, null=True, ))
+     ], required=False)
 
-    graphql_fields = [GraphQLBoolean("show_admins"), GraphQLString("admins_title"), ]#GraphQLStreamfield("members"), GraphQLStreamfield("mrow"), ]
+    graphql_fields = [GraphQLBoolean("show_admins"), GraphQLString("admins_title"), GraphQLStreamfield("mrows")]
     
 
 @register_streamfield_block
@@ -240,7 +252,7 @@ class _S_AcommunityBlock(blocks.StructBlock):
         ('mod', Acommunity_ModBlock(null=True, blank=False))
     ])
 
-    graphql_fields = [GraphQLStreamfield("admins"), GraphQLStreamfield("mods"), ]
+    graphql_fields = [GraphQLStreamfield("admins"), GraphQLStreamfield("mods")]
 
 @register_streamfield_block
 class _S_AspaceshipBlock(blocks.StructBlock):
@@ -253,7 +265,7 @@ class _S_AgalleryBlock(blocks.StructBlock):
         ('image', ImageChooserBlock(blank=True, classname="full")),
     ])
 
-    graphql_fields = [GraphQLString("title"), GraphQLStreamfield("gallery"), GraphQLImage("image"), ]
+    graphql_fields = [GraphQLString("title"), GraphQLStreamfield("gallery"), GraphQLImage("image")]
 
 @register_streamfield_block
 class _S_AcodeBlock(blocks.StructBlock):
