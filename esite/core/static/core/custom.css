@@ -1,0 +1,261 @@
+header {
+    background: #a32e45;  /* 4c7fa7 */
+  }
+  .wagtail-logo-container__desktop {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: all .25s cubic-bezier(.28,.15,0,2.1);
+  }
+
+  a {
+    color: #a32e45;
+  }
+  
+  a:hover {
+    color: #7a2b3a; /* 2a3c4a */
+  }
+  
+  .button {
+    background-color: #a32e45;
+    border: 1px solid #a32e45;
+  }
+  
+  .button:hover {
+    background-color: #7a2b3a;
+    border-color: transparent;
+  }
+  
+  .button-secondary {
+    color: #a32e45;
+    background-color: transparent;
+  }
+  
+  .button.disabled,
+  .button:disabled,
+  .button[disabled] {
+    background-color: #d9d9d9;
+    border-color: #d9d9d9;
+    color: #737373;
+  }
+  
+  input[type="submit"] {
+    background-color: #a32e45;
+    border-color: #a32e45;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #7a2b3a;
+    border-color: transparent;
+    color: #ffffff;
+  }
+  
+  .dropdown .dropdown-toggle {
+    background-color: #a32e45;
+  }
+  
+  .dropdown .dropdown-toggle:hover,
+  .dropdown.open .dropdown-toggle {
+    background-color: #7a2b3a;
+  }
+  
+  header .button {
+    background-color: #7a2b3a;
+  }
+  
+  header .button:hover {
+    background-color: #572b34;; /* 36223f */
+  }
+  
+  .tab-nav a {
+    background-color: #7a2b3a;
+    border-top: 0.3em solid #7a2b3a;
+  }
+  
+  .tab-nav a:hover {
+    border-top: 0.3em solid #290041; /* 003f41 */
+  }
+  
+  .tab-nav.merged {
+    background-color: #a32e45;
+  }
+  
+  .nav-main .menu-item a:after {
+    top: .55em;
+}
+
+  .button.yes {
+    background-color: #189370;
+    border: 1px solid #189370;
+  }
+  
+  .button.yes:hover {
+    color: #ffffff;
+    border-color: transparent;
+    background-color: #127055;
+  }
+  
+  .t-inverted .u-btn-current {
+    border-color: rgba(0, 0, 0, 0.35);
+  }
+  
+  .breadcrumb li a:after,
+  .breadcrumb li span:after {
+    top: .21em;
+    right: -.3em;
+    color: #ffffff;
+  }
+  
+  .breadcrumb li:hover {
+    background: #572b34;;
+  }
+  
+  @media screen and (min-width: 50em) {
+    .breadcrumb {
+      background-color: #7a2b3a;
+    }
+  }
+  
+  .progress .bar {
+    background-color: #a32e45;
+  }
+  
+  .progress {
+    background-color: #572b34;
+    border: 1px solid #a32e45;
+  }
+  
+  .loading-mask.loading:after {
+    color: #a32e45;
+  }
+  
+  .listing.chooser tbody tr:hover {
+    background-color: #a32e45;
+  }
+  
+  input[type="radio"]:checked:before {
+    color: #a32e45;
+  }
+  
+  input[type="checkbox"]:checked:before {
+    color: #a32e45;
+  }
+
+  .c-sf-add-button {
+    color: #a32e45 !important;
+  }
+  
+  .page-explorer .listing .index {
+    background-color: #a32e45;
+  }
+  
+  .page-explorer .listing .index .button.bicolor {
+    background-color: #a32e45;
+  }
+  
+  .page-explorer .listing .index .button:hover {
+    background-color: #7a2b3a;
+    border-color: transparent;
+  }
+  
+  .t-inverted .u-btn-current:hover {
+    background-color: #7a2b3a;
+    border-color: rgba(0, 0, 0, 0.35);
+  }
+  
+  .t-default .u-btn-current {
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #a32e45;
+  }
+  
+  .t-default .u-btn-current:hover {
+    background-color: #7a2b3a;
+    border-color: rgba(0, 0, 0, 0.35);
+  }
+  
+  .listing .button-secondary:hover {
+    background-color: #7a2b3a;
+    border-color: transparent;
+  }
+  
+  .listing .title h2 a:hover {
+    color: #7a2b3a;
+  }
+
+  .object>h2 {
+    background: #faf2fc !important;
+  }
+
+  .object>h2 label:before,
+  .object>h2:before {
+    background-color: #7a2b3a !important;
+  }
+  
+  .sequence-controls h3 label {
+    color: #7a2b3a;
+  }
+  
+  @media screen and (min-width: 50em) {
+    .listing td.children:hover {
+      background-color: #7a2b3a;
+    }
+  }
+  
+  .listing .children a {
+    color: #7a2b3a;
+    display: block;
+  }
+  
+  @media screen and (min-width: 50em) {
+    .listing tr:hover .children {
+      background-color: #a32e45;
+    }
+  }
+  
+  /*
+  .halloeditor:focus,
+  .tagit:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #eff4f8;
+    background-color: #f3eff2;
+  }
+  
+  .full .Draftail-Editor--focus {
+    background-color: #eff4f8;
+    border-color: #7a2b3a;
+  }
+  
+  li.sequence-member:hover {
+    background-color: #f2f2f3;
+    border-color: #a32e45;
+  }
+  
+  .listing .no-children a:hover {
+    color: #a32e45;
+  }
+  
+  */
+  
+  .dropdown ul {
+    background-color: #a32e45;
+  }
+  
+  .dropdown ul a:hover {
+    background-color: #7a2b3a;
+  }
+  /*
+  .icon-bin {
+    background-color: #cd3238;
+    border: 1px solid #cd3238;
+  }
+  */
+
+/**
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © 2019-2020 Werbeagentur Christian Aichner
+ */
