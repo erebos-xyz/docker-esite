@@ -53,8 +53,8 @@ class Session(models.Model):
     )
 
     session_scope = models.CharField(null=True, blank=True, max_length=256)
-    session_from = models.DateField(null=True, blank=True)
-    session_to = models.DateField(null=True, blank=True)
+    session_from = models.DateTimeField(null=True, blank=True)
+    session_to = models.DateTimeField(null=True, blank=True)
     session_room = models.CharField(null=True, blank=True, max_length=16)
     session_max_attendees = models.IntegerField(null=True, blank=False)
     session_current_attendees = models.IntegerField(null=True, blank=False)
