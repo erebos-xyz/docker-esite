@@ -35,13 +35,13 @@ def create_schema():
 
     #import esite.registration.schema
     #import esite.event.schema
-    #import esite.session.schema
+    import esite.session.schema
     #from esite.caching.schema import CacheUser
 
     class Query(
         # esite.registration.schema.Query,
         # esite.event.schema.Query,
-        # esite.session.schema.Ouery,
+        esite.session.schema.Query,
         graphene.ObjectType,
         PagesQuery(),
         ImagesQuery(),
@@ -65,7 +65,8 @@ def create_schema():
             'verify_token': graphql_jwt.Verify.Field(),
             'refresh_token': graphql_jwt.Refresh.Field(),
             'revoke_token': graphql_jwt.Revoke.Field(),
-            'cache_user': CacheUser.Field(),
+            'session_cache': esite.session.schema.SaveSessionCache.Field(),
+            'session_table': esite.session.schema.SaveSessionTable.Field(),
         }
         dict_params.update((camel_case_to_spaces(n).replace(' ', '_'), mut.Field())
                            for n, mut in registry.forms.items())

@@ -12,7 +12,7 @@ from wagtail.admin import widgets
 class SessionForm(forms.ModelForm):
     class Meta:
         model = Session
-        fields = ['session_token', 'session_name', 'session_scope', 'session_from', 'session_to', 'session_room']
+        fields = ['session_id', 'session_name', 'session_scope', 'session_from', 'session_to', 'session_room']
 
 class SessionChooserViewSet(ModelChooserViewSet):
     icon = 'pilcrow'

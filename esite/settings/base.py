@@ -247,7 +247,7 @@ GRAPHQL_JWT = {
 
 API_APPS = {
     "home": "",
-    # "profile": "",
+    "session": "",
     # "registration": "",
     #    "survey": "",
     # "event": "",

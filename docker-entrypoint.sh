@@ -24,15 +24,15 @@ if [ "x$DJANGO_LOAD_INITIAL_DATA" = 'xon' ]; then
 fi
 
 # Register event URL.
-if [[ $PRIMARY_HOST ]]; then
+#if [[ $PRIMARY_HOST ]]; then
 	# GINAvbs backup solution
-    git clone https://kleberf:5LyLHW8-RQLTX4xv5x_Y@gitlab.htl-villach.at/snekman/event-registry.git
+    #git clone https://kleberf:5LyLHW8-RQLTX4xv5x_Y@gitlab.htl-villach.at/snekman/event-registry.git
     #cd event-registry
-    echo $PRIMARY_HOST >> event.list
-    git commit -m "$(date -R)"
+    #echo $PRIMARY_HOST >> event.list
+    #git commit -m "$(date -R)"
     #git push https://kleberf:5LyLHW8-RQLTX4xv5x_Y@gitlab.htl-villach.at/snekman/event-registry.git
     #cd ..
-fi
+#fi
 
 exec "$@"
 

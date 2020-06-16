@@ -4,7 +4,7 @@
 
 # Django environments
 linux-venv/
-#windows-venv/
+windows-venv/
 
 # Pycache
 __pycache__/
@@ -18,11 +18,9 @@ __pycache__/
 *.ogg
 *.mp3
 
-# Images
-*.jpg
-*.png
-*.gif
-*.svg
+# Media
+media/images/
+media/original_images/
 
 # Fonts
 *.ttf

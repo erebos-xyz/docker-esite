@@ -39,30 +39,30 @@ from esite.api.models import (
 
 # Create your homepage related models here.
 
-@register_snippet
-class Button(models.Model):
-    button_title = models.CharField(null=True, blank=False, max_length=255)
-    #button_id = models.CharField(null=True, blank=True, max_length=255)
-    #button_class = models.CharField(null=True, blank=True, max_length=255)
-    button_embed = models.CharField(null=True, blank=True, max_length=255)
-    button_link = models.URLField(null=True, blank=True)
-    button_page = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-    )
+#@register_snippet
+#class Button(models.Model):
+#    button_title = models.CharField(null=True, blank=False, max_length=255)
+#    button_id = models.CharField(null=True, blank=True, max_length=255)
+#    button_class = models.CharField(null=True, blank=True, max_length=255)
+#    button_embed = models.CharField(null=True, blank=True, max_length=255)
+#    button_link = models.URLField(null=True, blank=True)
+#    button_page = models.ForeignKey(
+#        'wagtailcore.Page',
+#        null=True,
+#        blank=True,
+#        on_delete=models.SET_NULL,
+#        related_name='+',
+#    )
 
-    panels = [
-        FieldPanel('button_title'),
-        FieldPanel('button_embed'),
-        FieldPanel('button_link'),
-        PageChooserPanel('button_page')
-    ]
+#    panels = [
+#        FieldPanel('button_title'),
+#        FieldPanel('button_embed'),
+#        FieldPanel('button_link'),
+#        PageChooserPanel('button_page')
+#    ]
 
-    def __str__(self):
-        return self.button_title
+#    def __str__(self):
+#        return self.button_title
 
 
 #> Header
@@ -72,47 +72,65 @@ class _H_BannerBlock(blocks.StructBlock):
     banner_subhead = blocks.RichTextBlock(null=True, blank=False, help_text="The content of the frontpage slider element", classname="full")
     banner_image = ImageChooserBlock(null=True, blank=False, help_text="Big, high resolution slider image")
 
-    graphql_fields = [GraphQLString("banner_head"),GraphQLString("banner_subhead"),GraphQLImage("banner_image"),]
+    graphql_fields = [GraphQLString("banner_head"), GraphQLString("banner_subhead"), GraphQLImage("banner_image"),]
 
 #> Info Section
 
 @register_streamfield_block
-class _S_AboutBlock(blocks.StructBlock):
+class _S_InfoBlock(blocks.StructBlock):
     info_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="The bold header text at the frontpage slider")
-    info_subhead = blocks.RichTextBlock(null=True, blank=False, help_text="The content of the frontpage slider element", classname="full")
+    info_paragraph = blocks.RichTextBlock(null=True, blank=False, help_text="The content of the frontpage slider element", classname="full")
     info_image = ImageChooserBlock(null=True, blank=False, help_text="Big, high resolution slider image")
     info_image_position = blocks.ChoiceBlock(null=True, blank=False, choices=[
         ('left', 'left'),
         ('right', 'right'),
     ], icon='cup')
 
-    graphql_fields = [GraphQLString("head"), GraphQLString("subhead"),]
+    graphql_fields = [GraphQLString("info_head"), GraphQLString("info_subhead"), GraphQLImage("info_image"), GraphQLString("info_image_position"),]
 
 @register_streamfield_block
-class Box_CollumBlock(blocks.StructBlock):
-    collum_image = ImageChooserBlock(null=True, blank=False, help_text="Icon representating the below content")
-    collum_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="The bold header text at the frontpage slider")
-    collum_subhead = blocks.RichTextBlock(null=True, blank=False, help_text="The content of the frontpage slider element", classname="full")
-    collum_paragraph = blocks.RichTextBlock(null=True, blank=False, help_text="Formatted text", classname="full")
+class Boxes_BoxBlock(blocks.StructBlock):
+    box_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="The bold header text at the frontpage slider")
+    box_paragraph = blocks.RichTextBlock(null=True, blank=False, help_text="Formatted text", classname="full")
 
 @register_streamfield_block
 class _S_BoxesBlock(blocks.StructBlock):
     boxes_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
     boxes_displayhead = blocks.BooleanBlock(null=True, blank=True, default=True, required=False, help_text="Whether or not to display the header")
-    boxes_collums = blocks.StreamBlock([
-        ('box_collum', Box_CollumBlock(null=True, blank=False, icon='cogs'))
-    ], null=True, blank=False, max_num=3)
+    boxes_boxes = blocks.StreamBlock([
+        ('boxes_box', Boxes_BoxBlock(null=True, blank=False, icon='cogs'))
+    ], null=True, blank=False)
+
+    graphql_fields = [GraphQLString("boxes_head"), GraphQLBoolean("boxes_displayhead"), GraphQLStreamfield("boxes_boxes"),]
+
+@register_streamfield_block
+class Partners_PartnerBlock(blocks.StructBlock):
+    partner_logo = ImageChooserBlock(null=True, blank=False, help_text="Partner logo")
+    partner_link = blocks.URLBlock(null=True, blank=True, help_text="Important! Format https://www.domain.tld/xyz")
+
+@register_streamfield_block
+class _S_PartnersBlock(blocks.StructBlock):
+    partners_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
+    partners_displayhead = blocks.BooleanBlock(null=True, blank=True, default=True, required=False, help_text="Whether or not to display the header")
+    partners_partners = blocks.StreamBlock([
+        ('partners_partner', Partners_PartnerBlock(null=True, blank=False, icon='cogs'))
+    ], null=True, blank=False)
+
+    graphql_fields = [GraphQLString("partners_head"), GraphQLBoolean("partners_displayhead"), GraphQLStreamfield("partners_partners"),]
+
 
 #> Homepage
 class HomePage(Page):
     headers = StreamField([
         ('h_banner', _H_BannerBlock(null=True, blank=False, icon='title')),
-        ('code', blocks.RawHTMLBlock(null=True, blank=True, classname="full", icon='code')),
+        ('h_code', blocks.RawHTMLBlock(null=True, blank=True, classname="full", icon='code')),
     ], null=True, blank=False)
 
     sections = StreamField([
-        ('s_about', _S_AboutBlock(null=True, blank=False, icon='radio-empty')),
+        ('s_info', _S_InfoBlock(null=True, blank=False, icon='radio-empty')),
         ('s_boxes', _S_BoxesBlock(null=True, blank=False, icon='pilcrow')),
+        ('s_partners', _S_PartnersBlock(null=True, blank=False, icon='fa-id-badge')),
+        ('s_code', blocks.RawHTMLBlock(null=True, blank=True, classname="full", icon='code')),
     ], null=True, blank=False, )
 
     main_content_panels = [
