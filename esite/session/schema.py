@@ -30,7 +30,7 @@ class SaveSessionCache(graphene.Mutation):
     @login_required
     def mutate(self, info, token, session_id, session_cache):
 
-        session_obj = Session.objects.get(session_id=session_id).specific
+        session_obj = Session.objects.get(session_id=session_id)
 
         session_obj.session_cache = session_cache
 
@@ -59,7 +59,7 @@ class SaveSessionTable(graphene.Mutation):
     @login_required
     def mutate(self, info, token, session_id, session_name, session_scope, session_from, session_to, session_room, session_max_attendees, session_current_attendees, session_presentators, session_attendees, session_cache):
 
-        session_obj = Session.objects.get(session_id=session_id).specific
+        session_obj = Session.objects.get(session_id=session_id)
 
         session_obj.session_name = session_name
         session_obj.session_scope = session_scope
