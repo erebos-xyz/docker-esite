@@ -111,6 +111,8 @@ class Session(models.Model):
         if not self.session_id:
             self.session_id = str(uuid.uuid4())
 
+        self.session_current_attendees = len(self.session_attendees.stream_data)
+
         super(Session, self).save(*args, **kwargs)
 
     def __str__(self):
