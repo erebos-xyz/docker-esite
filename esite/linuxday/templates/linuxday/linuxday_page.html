@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block body_class %}
-template-homepage
+template-linuxdaypage
 {% endblock %}
 
 {% block extra_css %}
@@ -32,12 +32,12 @@ template-homepage
 {% endblock %}
 {% block content %}
 <header class="site-header">
-  {% include "home/h_navtop/hnavtop.html" %}
+  {% include "linuxday/h_navtop/hnavtop.html" %}
   {% for h in page.headers %}
   {% if h.block_type == 'hfull' %}
-  {% include "home/h_full/full.html" %}
+  {% include "linuxday/h_full/full.html" %}
   {% elif h.block_type == 'h_banner' %}
-  {% include "home/h_banner/hbanner.html" %}
+  {% include "linuxday/h_banner/hbanner.html" %}
   {% elif h.block_type == 'h_banner' %}
   {{ h.h_code }}
   {% endif %}
@@ -45,15 +45,15 @@ template-homepage
 </header>
 {% for s in page.sections %}
 {% if s.block_type == 's_info' %}
-{% include "home/s_info/sinfo.html" %}
+{% include "linuxday/s_info/sinfo.html" %}
 {% elif s.block_type == 's_boxes' %}
-{% include "home/s_boxes/sboxes.html" %}
+{% include "linuxday/s_boxes/sboxes.html" %}
 {% elif s.block_type == 's_code' %}
 {{ s.s_code }}
 {% endif %}
 {% endfor %}
-{% include "home/s_partners/spartners.html" %}
-{% include "home/f_generic/fgeneric.html" %}
+{% include "linuxday/s_partners/spartners.html" %}
+{% include "linuxday/f_generic/fgeneric.html" %}
 {% block script %}
 {% endblock %}
 {% endblock %}
