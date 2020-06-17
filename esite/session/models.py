@@ -42,7 +42,7 @@ class _SE_AttendeeBlock(blocks.StructBlock):
 
 class Session(models.Model):
     session_id = models.CharField(primary_key=True, max_length=36)
-    session_name = models.CharField(null=True, blank=True, max_length=16)
+    session_name = models.CharField(null=True, blank=True, max_length=32)
     session_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -54,9 +54,9 @@ class Session(models.Model):
     session_scope = models.CharField(null=True, blank=True, max_length=256)
     session_from = models.DateTimeField(null=True, blank=True)
     session_to = models.DateTimeField(null=True, blank=True)
-    session_room = models.CharField(null=True, blank=True, max_length=16)
-    session_max_attendees = models.IntegerField(null=True, blank=False)
-    session_current_attendees = models.IntegerField(null=True, blank=False)
+    session_room = models.CharField(null=True, blank=True, max_length=32)
+    session_max_attendees = models.PositiveIntegerField(null=True, blank=False)
+    session_current_attendees = models.PositiveIntegerField(null=True, blank=False)
 
     session_presentators = StreamField([
         ('se_presentator', _SE_PresentatorBlock(null=True, blank=False, icon='fa-id-badge')),
