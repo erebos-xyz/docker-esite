@@ -1,6 +1,5 @@
-from django.http import HttpResponse
+import uuid
 from django.db import models
-from django.core.validators import RegexValidator
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -42,7 +41,7 @@ class _SE_AttendeeBlock(blocks.StructBlock):
 
 
 class Session(models.Model):
-    session_id = models.CharField(primary_key=True, max_length=16)
+    session_id = models.CharField(primary_key=True, max_length=36)
     session_name = models.CharField(null=True, blank=True, max_length=16)
     session_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -68,7 +67,8 @@ class Session(models.Model):
     ], null=True, blank=True)
 
     session_cache = models.TextField(null=True, blank=True)
-    
+
+
     graphql_fields = [
         GraphQLString("session_id"),
         GraphQLString("session_name"),
@@ -85,7 +85,7 @@ class Session(models.Model):
     ]
 
     panels = [
-        FieldPanel('session_id'),
+        #FieldPanel('session_id'),
         FieldPanel('session_name'),
         ImageChooserPanel('session_image'),
         FieldPanel('session_scope'),
@@ -98,6 +98,13 @@ class Session(models.Model):
         StreamFieldPanel('session_attendees'),
         FieldPanel('session_cache'),
     ]
+
+    # custom save function
+    def save(self, *args, **kwargs):
+        if not self.session_id:
+            self.session_id = str(uuid.uuid4())
+
+        super(Session, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.session_id

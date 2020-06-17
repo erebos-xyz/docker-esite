@@ -130,7 +130,7 @@ class RegistrationFormPage(AbstractEmailForm):
         user = get_user_model()(
             username=username,
             is_customer=True,
-            is_active = False,
+            is_active=False,
             customer_id=customer_id,
             registration_data=registration_data,
         )
@@ -142,7 +142,7 @@ class RegistrationFormPage(AbstractEmailForm):
         profile_page = ProfilePage(
             title=f"{user.username}",
             slug=f"{user.username}",
-            username = f"{user.username}",
+            username=f"{user.username}",
             telephone=telephone,
             address=address,
             city=city,
@@ -166,7 +166,7 @@ class RegistrationFormPage(AbstractEmailForm):
                 profile_page = ProfilePage(
                     title=f"{user.username}",
                     slug=f"{user.username}",
-                    username = f"{user.username}",
+                    username=f"{user.username}",
                     telephone=telephone,
                     address=address,
                     city=city,
@@ -194,7 +194,7 @@ class RegistrationFormPage(AbstractEmailForm):
             profile_page = ProfilePage(
                 title=f"{user.username}",
                 slug=f"{user.username}",
-                username = f"{user.username}",
+                username=f"{user.username}",
                 telephone=telephone,
                 address=address,
                 city=city,

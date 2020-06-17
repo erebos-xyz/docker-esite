@@ -7,135 +7,118 @@ def create_homepage(apps, schema_editor):
     ContentType = apps.get_model('contenttypes.ContentType')
     Page = apps.get_model('wagtailcore.Page')
     Site = apps.get_model('wagtailcore.Site')
-    Images = apps.get_model('wagtailimages.Image')
+    Image = apps.get_model('wagtailimages.Image')
     HomePage = apps.get_model('home.HomePage')
 
     # Delete the default homepage
     # If migration is run multiple times, it may have already been deleted
     Page.objects.filter(id=2).delete()
 
-    Images.objects.create(
-      id=1,
-      title='linuxday.jpg',
-      file='init_images/linuxday.jpg',
-      width=1100,
-      height=592,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=125764,
-      collection_id=1,
-      file_hash='81451a6dc48a63a55a18f695a12bfe7754d5bb42',
+    # Create initial images
+    Image.objects.create(
+        id=1,
+        title='linuxday.jpg',
+        file='init_images/linuxday.jpg',
+        width=1100,
+        height=592,
+        file_size=125764,
+        collection_id=1,
+        file_hash='81451a6dc48a63a55a18f695a12bfe7754d5bb42',
     )
 
-    Images.objects.create(
-      id=2,
-      title='LinmuxWochen.png',
-      file='init_images/LinmuxWochen.png',
-      width=336,
-      height=160,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=20499,
-      collection_id=1,
-      file_hash='50b32f7f8b80aa22cbaabd666b14ce65ff142581',
+    Image.objects.create(
+        id=2,
+        title='LinmuxWochen.png',
+        file='init_images/LinmuxWochen.png',
+        width=336,
+        height=160,
+        file_size=20499,
+        collection_id=1,
+        file_hash='50b32f7f8b80aa22cbaabd666b14ce65ff142581',
     )
 
-    Images.objects.create(
-      id=3,
-      title='csm_STRABAGLOGO_rot_7a4706104f.jpg',
-      file='init_images/csm_STRABAGLOGO_rot_7a4706104f.jpg',
-      width=263,
-      height=109,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=8302,
-      collection_id=1,
-      file_hash='357290a3aa638d77f5f38641d117e8bbc4373af6',
+    Image.objects.create(
+        id=3,
+        title='csm_STRABAGLOGO_rot_7a4706104f.jpg',
+        file='init_images/csm_STRABAGLOGO_rot_7a4706104f.jpg',
+        width=263,
+        height=109,
+        file_size=8302,
+        collection_id=1,
+        file_hash='357290a3aa638d77f5f38641d117e8bbc4373af6',
     )
 
-    Images.objects.create(
-      id=4,
-      title='csm_red-hat-social-share_0e49d6c4fc.jpg',
-      file='init_images/csm_red-hat-social-share_0e49d6c4fc.jpg',
-      width=263,
-      height=148,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=4874,
-      collection_id=1,
-      file_hash='8d4903eb67f8ee69b50a6e076baf0e110cd410f9',
+    Image.objects.create(
+        id=4,
+        title='csm_red-hat-social-share_0e49d6c4fc.jpg',
+        file='init_images/csm_red-hat-social-share_0e49d6c4fc.jpg',
+        width=263,
+        height=148,
+        file_size=4874,
+        collection_id=1,
+        file_hash='8d4903eb67f8ee69b50a6e076baf0e110cd410f9',
     )
 
-    Images.objects.create(
-      id=5,
-      title='csm_Plakat_Entwurf1_8fc59a4401.png',
-      file='init_images/csm_Plakat_Entwurf1_8fc59a4401.png',
-      width=530,
-      height=702,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=121723,
-      collection_id=1,
-      file_hash='c6aa5e4142523f04bbe5c50596baba967f84b5eb',
+    Image.objects.create(
+        id=5,
+        title='csm_Plakat_Entwurf1_8fc59a4401.png',
+        file='init_images/csm_Plakat_Entwurf1_8fc59a4401.png',
+        width=530,
+        height=702,
+        file_size=121723,
+        collection_id=1,
+        file_hash='c6aa5e4142523f04bbe5c50596baba967f84b5eb',
     )
 
-    Images.objects.create(
-      id=6,
-      title='csm_OSEG-Logos-4501476_738c67d026.jpg',
-      file='init_images/csm_OSEG-Logos-4501476_738c67d026.jpg',
-      width=263,
-      height=161,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=15878,
-      collection_id=1,
-      file_hash='306ce3f5a554a51bcb9850430ee1ddf19566664d',
+    Image.objects.create(
+        id=6,
+        title='csm_OSEG-Logos-4501476_738c67d026.jpg',
+        file='init_images/csm_OSEG-Logos-4501476_738c67d026.jpg',
+        width=263,
+        height=161,
+        file_size=15878,
+        collection_id=1,
+        file_hash='306ce3f5a554a51bcb9850430ee1ddf19566664d',
     )
 
-    Images.objects.create(
-      id=7,
-      title='csm_hqdefault_da22db267d.jpg',
-      file='init_images/csm_hqdefault_da22db267d.jpg',
-      width=263,
-      height=198,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=3867,
-      collection_id=1,
-      file_hash='25b2b789df85e408a0c5eac7b71f29bf16a9ad91',
+    Image.objects.create(
+        id=7,
+        title='csm_hqdefault_da22db267d.jpg',
+        file='init_images/csm_hqdefault_da22db267d.jpg',
+        width=263,
+        height=198,
+        file_size=3867,
+        collection_id=1,
+        file_hash='25b2b789df85e408a0c5eac7b71f29bf16a9ad91',
     )
 
-    Images.objects.create(
-      id=8,
-      title='csm_anexia_607859e049.png',
-      file='init_images/csm_anexia_607859e049.png',
-      width=263,
-      height=152,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=6581,
-      collection_id=1,
-      file_hash='8422ae61c4ccfc50ea1934376249c9d796f0496d',
+    Image.objects.create(
+        id=8,
+        title='csm_anexia_607859e049.png',
+        file='init_images/csm_anexia_607859e049.png',
+        width=263,
+        height=152,
+        file_size=6581,
+        collection_id=1,
+        file_hash='8422ae61c4ccfc50ea1934376249c9d796f0496d',
     )
 
-    Images.objects.create(
-      id=9,
-      title='csm_alturos-destinations-logo-2017_c2694ef669.png',
-      file='init_images/csm_alturos-destinations-logo-2017_c2694ef669.png',
-      width=263,
-      height=127,
-      #created_at='2020-06-06 17:16:06.524619',
-      #uploaded_by_user_id=1,
-      file_size=7306,
-      collection_id=1,
-      file_hash='b25745a7bdc0f71d82afda1f85ef2c4f19ad88c3',
+    Image.objects.create(
+        id=9,
+        title='csm_alturos-destinations-logo-2017_c2694ef669.png',
+        file='init_images/csm_alturos-destinations-logo-2017_c2694ef669.png',
+        width=263,
+        height=127,
+        file_size=7306,
+        collection_id=1,
+        file_hash='b25745a7bdc0f71d82afda1f85ef2c4f19ad88c3',
     )
 
     # Create content type for homepage model
     homepage_content_type, __ = ContentType.objects.get_or_create(
         model='homepage', app_label='home')
 
-    # Create a new homepage
+    # Create a initial homepage
     homepage = HomePage.objects.create(
         title="Linuxday",
         draft_title="Linuxday",
