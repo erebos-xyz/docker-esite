@@ -4,6 +4,8 @@ from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.admin.edit_handlers import PageChooserPanel, TabbedInterface, ObjectList, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldPanel
+from wagtail.core.models import Page
+from wagtail.core import blocks
 
 from esite.api.helpers import register_streamfield_block
 
@@ -84,7 +86,7 @@ class Session(models.Model):
         GraphQLString("session_cache"),
     ]
 
-    panels = [
+    main_content_panels = [
         #FieldPanel('session_id'),
         FieldPanel('session_name'),
         ImageChooserPanel('session_image'),
@@ -99,6 +101,11 @@ class Session(models.Model):
         FieldPanel('session_cache'),
     ]
 
+    
+    edit_handler = TabbedInterface([
+        ObjectList(main_content_panels, heading='Main'),
+    ])
+
     # custom save function
     def save(self, *args, **kwargs):
         if not self.session_id:
@@ -108,3 +115,21 @@ class Session(models.Model):
 
     def __str__(self):
         return self.session_id
+
+#> Linuxdaypage
+class SessionPage(Page):
+    test = models.CharField(null=True, blank=True, max_length=256)
+
+    main_content_panels = [
+        FieldPanel('test'),
+    ]
+
+    graphql_fields = [
+        GraphQLString("test"),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(Page.content_panels + main_content_panels, heading='Main'),
+        ObjectList(Page.promote_panels + Page.settings_panels, heading='Settings', classname="settings")
+    ])
+

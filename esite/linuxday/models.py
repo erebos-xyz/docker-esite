@@ -119,8 +119,8 @@ class _S_PartnersBlock(blocks.StructBlock):
     graphql_fields = [GraphQLString("partners_head"), GraphQLBoolean("partners_displayhead"), GraphQLStreamfield("partners_partners"),]
 
 
-#> Homepage
-class HomePage(Page):
+#> Linuxdaypage
+class LinuxdayPage(Page):
     headers = StreamField([
         ('h_banner', _H_BannerBlock(null=True, blank=False, icon='title')),
         ('h_code', blocks.RawHTMLBlock(null=True, blank=True, classname="full", icon='code')),

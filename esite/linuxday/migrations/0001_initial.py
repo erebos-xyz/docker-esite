@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='HomePage',
+            name='LinuxdayPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('headers', wagtail.core.fields.StreamField([('h_banner', wagtail.core.blocks.StructBlock([('banner_head', wagtail.core.blocks.CharBlock(blank=False, classname='full title', help_text='The bold header text at the frontpage slider', null=True)), ('banner_subhead', wagtail.core.blocks.RichTextBlock(blank=False, classname='full', help_text='The content of the frontpage slider element', null=True)), ('banner_image', wagtail.images.blocks.ImageChooserBlock(blank=False, help_text='Big, high resolution slider image', null=True))], blank=False, icon='title', null=True)), ('h_code', wagtail.core.blocks.RawHTMLBlock(blank=True, classname='full', icon='code', null=True))], null=True)),

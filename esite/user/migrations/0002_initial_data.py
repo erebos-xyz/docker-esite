@@ -3,7 +3,7 @@ from django.db import migrations
 from django.contrib.auth import get_user_model
 
 
-def create_anonuser(apps, schema_editor):
+def create_initialuser(apps, schema_editor):
     # Get models
     User = get_user_model()
 
@@ -17,32 +17,24 @@ def create_anonuser(apps, schema_editor):
 
     anonuser.save()
 
-def remove_anonuser(apps, schema_editor):
-    # Get models
-    User = get_user_model()
-
-    # Delete the anonymous user
-    User.objects.get(username="cisco").delete()
-
-def create_adminuser(apps, schema_editor):
-    # Get models
-    User = get_user_model()
-
-    # Create anonymous user
-    anonuser = User.objects.create(
+    # Create admin user
+    adminuser = User.objects.create(
         username="admin",
-        is_customer=False,
+        is_superuser=True,
     )
 
     adminuser.set_password("ciscocisco")
 
     adminuser.save()
 
-def remove_adminuser(apps, schema_editor):
+def remove_initialuser(apps, schema_editor):
     # Get models
     User = get_user_model()
 
     # Delete the anonymous user
+    User.objects.get(username="cisco").delete()
+
+    # Delete the admin user
     User.objects.get(username="admin").delete()
 
 
@@ -53,5 +45,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(create_anonuser, remove_anonuser, create_adminuser, remove_adminuser),
+        migrations.RunPython(create_initialuser, remove_initialuser),
     ]

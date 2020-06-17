@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # 'esite.registration',
     'esite.user',
     # 'esite.customer',
-    'esite.home',
+    'esite.linuxday',
     # 'esite.profile',
     # 'esite.caching',
     # 'esite.gift',
@@ -217,7 +217,7 @@ WAGTAILSEARCH_BACKENDS = {
 # f isetup hope I get to comment this
 GRAPHQL_API = {
     'APPS': [
-        'home',
+        'linuxday',
     ],
     'PREFIX': {
     },
@@ -246,10 +246,10 @@ GRAPHQL_JWT = {
 }
 
 API_APPS = {
-    "home": "",
+    "linuxday": "",
     "session": "",
     # "registration": "",
-    #    "survey": "",
+    # "survey": "",
     # "event": "",
 }
 

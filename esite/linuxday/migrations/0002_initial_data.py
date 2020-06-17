@@ -8,7 +8,7 @@ def create_homepage(apps, schema_editor):
     Page = apps.get_model('wagtailcore.Page')
     Site = apps.get_model('wagtailcore.Site')
     Image = apps.get_model('wagtailimages.Image')
-    HomePage = apps.get_model('home.HomePage')
+    HomePage = apps.get_model('linuxday.LinuxdayPage')
 
     # Delete the default homepage
     # If migration is run multiple times, it may have already been deleted
@@ -18,7 +18,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=1,
         title='linuxday.jpg',
-        file='init_images/linuxday.jpg',
+        file='init_images/linuxday/linuxday.jpg',
         width=1100,
         height=592,
         file_size=125764,
@@ -29,7 +29,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=2,
         title='LinmuxWochen.png',
-        file='init_images/LinmuxWochen.png',
+        file='init_images/linuxday/LinmuxWochen.png',
         width=336,
         height=160,
         file_size=20499,
@@ -40,7 +40,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=3,
         title='csm_STRABAGLOGO_rot_7a4706104f.jpg',
-        file='init_images/csm_STRABAGLOGO_rot_7a4706104f.jpg',
+        file='init_images/linuxday/csm_STRABAGLOGO_rot_7a4706104f.jpg',
         width=263,
         height=109,
         file_size=8302,
@@ -51,7 +51,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=4,
         title='csm_red-hat-social-share_0e49d6c4fc.jpg',
-        file='init_images/csm_red-hat-social-share_0e49d6c4fc.jpg',
+        file='init_images/linuxday/csm_red-hat-social-share_0e49d6c4fc.jpg',
         width=263,
         height=148,
         file_size=4874,
@@ -62,7 +62,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=5,
         title='csm_Plakat_Entwurf1_8fc59a4401.png',
-        file='init_images/csm_Plakat_Entwurf1_8fc59a4401.png',
+        file='init_images/linuxday/csm_Plakat_Entwurf1_8fc59a4401.png',
         width=530,
         height=702,
         file_size=121723,
@@ -73,7 +73,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=6,
         title='csm_OSEG-Logos-4501476_738c67d026.jpg',
-        file='init_images/csm_OSEG-Logos-4501476_738c67d026.jpg',
+        file='init_images/linuxday/csm_OSEG-Logos-4501476_738c67d026.jpg',
         width=263,
         height=161,
         file_size=15878,
@@ -84,7 +84,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=7,
         title='csm_hqdefault_da22db267d.jpg',
-        file='init_images/csm_hqdefault_da22db267d.jpg',
+        file='init_images/linuxday/csm_hqdefault_da22db267d.jpg',
         width=263,
         height=198,
         file_size=3867,
@@ -95,7 +95,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=8,
         title='csm_anexia_607859e049.png',
-        file='init_images/csm_anexia_607859e049.png',
+        file='init_images/linuxday/csm_anexia_607859e049.png',
         width=263,
         height=152,
         file_size=6581,
@@ -106,7 +106,7 @@ def create_homepage(apps, schema_editor):
     Image.objects.create(
         id=9,
         title='csm_alturos-destinations-logo-2017_c2694ef669.png',
-        file='init_images/csm_alturos-destinations-logo-2017_c2694ef669.png',
+        file='init_images/linuxday/csm_alturos-destinations-logo-2017_c2694ef669.png',
         width=263,
         height=127,
         file_size=7306,
@@ -116,7 +116,7 @@ def create_homepage(apps, schema_editor):
 
     # Create content type for homepage model
     homepage_content_type, __ = ContentType.objects.get_or_create(
-        model='homepage', app_label='home')
+        model='linuxdaypage', app_label='linuxday')
 
     # Create a initial homepage
     homepage = HomePage.objects.create(
@@ -285,7 +285,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('wagtailimages', '0001_initial'),
-        ('home', '0001_initial'),
+        ('linuxday', '0001_initial'),
     ]
 
     operations = [
