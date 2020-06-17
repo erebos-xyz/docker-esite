@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'esite.user',
     # 'esite.customer',
     'esite.linuxday',
+    'esite.projekttage',
     # 'esite.profile',
     # 'esite.caching',
     # 'esite.gift',
@@ -218,6 +219,7 @@ WAGTAILSEARCH_BACKENDS = {
 GRAPHQL_API = {
     'APPS': [
         'linuxday',
+        'esite.projekttage',
     ],
     'PREFIX': {
     },
@@ -247,6 +249,7 @@ GRAPHQL_JWT = {
 
 API_APPS = {
     "linuxday": "",
+    "projekttage": "",
     "session": "",
     # "registration": "",
     # "survey": "",
