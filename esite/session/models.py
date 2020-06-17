@@ -1,11 +1,14 @@
 import uuid
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.admin.edit_handlers import PageChooserPanel, TabbedInterface, ObjectList, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldPanel
 from wagtail.core.models import Page
 from wagtail.core import blocks
+from datetime import timedelta
 
 from esite.api.helpers import register_streamfield_block
 
@@ -21,6 +24,15 @@ from esite.api.models import (
     GraphQLBoolean,
     GraphQLSnippet,
 )
+
+def min_duration_validator(value):
+    if value == timedelta(seconds=0):
+        raise ValidationError(
+            'A Session must not have a negative duration.',
+            code='invalid',
+        )
+    else:
+        return value
 
 # Create your homepage related models here.
 
@@ -56,9 +68,10 @@ class Session(models.Model):
     session_scope = models.CharField(null=True, blank=True, max_length=256)
     session_from = models.DateTimeField(null=True, blank=True)
     session_to = models.DateTimeField(null=True, blank=True)
+    session_duration = models.DurationField(null=True, blank=True, validators=[min_duration_validator])
     session_room = models.CharField(null=True, blank=True, max_length=32)
     session_max_attendees = models.PositiveIntegerField(null=False, blank=False, default=16)
-    session_current_attendees = models.PositiveIntegerField(null=False, blank=False, default=0)
+    session_current_attendees = models.PositiveIntegerField(null=False, blank=False, default=0, validators=[MaxValueValidator(9000, message="The Field session_current_attendees must not exceed session_max_attendees.")])
 
     session_presentators = StreamField([
         ('se_presentator', _SE_PresentatorBlock(null=True, icon='fa-id-badge')),
@@ -78,6 +91,7 @@ class Session(models.Model):
         GraphQLString("session_scope"),
         GraphQLString("session_from"),
         GraphQLString("session_to"),
+        GraphQLString("session_duration"),
         GraphQLString("session_room"),
         GraphQLString("session_max_attendees"),
         GraphQLString("session_current_attendees"),
@@ -93,9 +107,10 @@ class Session(models.Model):
         FieldPanel('session_scope'),
         FieldPanel('session_from'),
         FieldPanel('session_to'),
+        #FieldPanel('session_duration'),
         FieldPanel('session_room'),
         FieldPanel('session_max_attendees'),
-        FieldPanel('session_current_attendees'),
+        #FieldPanel('session_current_attendees'),
         StreamFieldPanel('session_presentators'),
         StreamFieldPanel('session_attendees'),
         FieldPanel('session_cache'),
@@ -112,6 +127,30 @@ class Session(models.Model):
             self.session_id = str(uuid.uuid4())
 
         self.session_current_attendees = len(self.session_attendees.stream_data)
+
+        if(self.session_max_attendees >= self.session_current_attendees):
+            self.session_current_attendees = len(self.session_attendees.stream_data)
+        else:
+            # set self.session_current_attendees to a meme
+            #self.session_current_attendees = 9001
+
+            raise ValidationError(
+                'The Field session_current_attendees must not exceed session_max_attendees.',
+                code='invalid',
+                params={'session_current_attendees': self.session_current_attendees},
+            )
+
+        if((self.session_to - self.session_from) >= timedelta(seconds=0)):
+            self.session_duration = self.session_to - self.session_from
+        else:
+            # set to delta 0
+            #self.session_duration = timedelta(seconds=0)
+
+            raise ValidationError(
+                'A Session must not have a negative duration.',
+                code='invalid',
+                params={'session_from': self.session_from, 'session_to': self.session_to},
+            )
 
         super(Session, self).save(*args, **kwargs)
 
