@@ -22,7 +22,29 @@ def remove_anonuser(apps, schema_editor):
     User = get_user_model()
 
     # Delete the anonymous user
-    User.objects.filter(username="cisco", depth=2).delete()
+    User.objects.get(username="cisco").delete()
+
+def create_adminuser(apps, schema_editor):
+    # Get models
+    User = get_user_model()
+
+    # Create anonymous user
+    anonuser = User.objects.create(
+        username="admin",
+        is_customer=False,
+    )
+
+    adminuser.set_password("ciscocisco")
+
+    adminuser.save()
+
+def remove_adminuser(apps, schema_editor):
+    # Get models
+    User = get_user_model()
+
+    # Delete the anonymous user
+    User.objects.get(username="admin").delete()
+
 
 class Migration(migrations.Migration):
 
@@ -31,5 +53,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(create_anonuser, remove_anonuser),
+        migrations.RunPython(create_anonuser, remove_anonuser, create_adminuser, remove_adminuser),
     ]

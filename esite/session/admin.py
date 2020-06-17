@@ -14,8 +14,8 @@ class SessionAdmin(ModelAdmin):
     exclude_from_explorer = False
 
     # Listed in the registration overview
-    list_filter = ('session_id', 'session_name', 'session_scope',
-                   'session_from', 'session_to', 'session_room')
+    list_filter = ('session_name', 'session_scope', 'session_from',
+                    'session_to', 'session_room')
     list_display = ('session_name', 'session_scope', 'session_from',
                     'session_to', 'session_room')
     search_fields = ('session_id', 'session_name', 'session_scope',
