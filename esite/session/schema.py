@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 
 import graphene
+from graphene.types.generic import GenericScalar
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError
 from graphql.execution.base import ResolveInfo
@@ -13,9 +14,10 @@ from esite.api.registry import registry
 # Create your user related graphql schemes here.
 
 class Query(graphene.ObjectType):
-    sessions = graphene.List(registry.models[Session])
+    sessions = graphene.List(registry.models[Session], token=graphene.String())
 
-    def resolve_sessions(self, info):
+    @login_required
+    def resolve_sessions(self, info, **_kwargs):
         # To list all events
         return Session.objects.all()
 
@@ -38,6 +40,68 @@ class SaveSessionCache(graphene.Mutation):
 
         return SaveSessionCache(session=session)
 
+class SessionCheckAttendance(graphene.Mutation):
+    session = graphene.Field(registry.models[Session])
+
+    class Arguments:
+        token = graphene.String(required=False)
+        session_id = graphene.String(required=True)
+        session_attendee_name = graphene.String(required=True)
+
+    @login_required
+    def mutate(self, info, token, session_id, session_attendee_name):
+
+        session = Session.objects.get(session_id=f"{session_id}")
+
+        for index, attendee in enumerate(session.session_attendees.stream_data):
+            if attendee["value"]["attendee_name"] == session_attendee_name:
+                session.session_attendees.stream_data[index]["value"]["attendee_attendance"] = True
+
+        session.save()
+
+        return SaveSessionCache(session=session)
+
+class SessionAddAttendee(graphene.Mutation):
+    session = graphene.Field(registry.models[Session])
+
+    class Arguments:
+        token = graphene.String(required=False)
+        session_id = graphene.String(required=True)
+        session_attendee = GenericScalar(required=True)
+
+    @login_required
+    def mutate(self, info, token, session_id, session_attendee):
+
+        session = Session.objects.get(session_id=f"{session_id}")
+
+        for attendee in session.session_attendees.stream_data:
+            if attendee["value"]["attendee_name"] == session_attendee["attendee_name"]:
+                raise GraphQLError('That attendee already exists')
+
+        session.session_attendees.stream_data.append({'type': 'se_attendee', 'value': session_attendee})
+
+        session.save()
+
+        return SaveSessionCache(session=session)
+
+class SessionRemoveAttendee(graphene.Mutation):
+    session = graphene.Field(registry.models[Session])
+
+    class Arguments:
+        token = graphene.String(required=False)
+        session_id = graphene.String(required=True)
+        session_attendee_name = graphene.String(required=True)
+
+    @login_required
+    def mutate(self, info, token, session_id, session_attendee_name):
+
+        session = Session.objects.get(session_id=f"{session_id}")
+
+        session.session_attendees.stream_data=[attendee for attendee in session.session_attendees.stream_data if not (attendee["value"]["attendee_name"] == session_attendee_name)]
+
+        session.save()
+
+        return SaveSessionCache(session=session)
 
 class SaveSessionTable(graphene.Mutation):
     session = graphene.Field(registry.models[Session])

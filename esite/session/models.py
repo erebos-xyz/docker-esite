@@ -26,18 +26,18 @@ from esite.api.models import (
 
 @register_streamfield_block
 class _SE_PresentatorBlock(blocks.StructBlock):
-    presentator_name = blocks.CharBlock(null=True, blank=False, help_text="Name of the presentator")
-    presentator_email = blocks.EmailBlock(null=True, blank=True, help_text="Important! Format ci@s.co")
-    presentator_link = blocks.URLBlock(null=True, blank=True, help_text="Important! Format https://www.domain.tld/xyz")
+    presentator_name = blocks.CharBlock(null=True, required=True, help_text="Name of the presentator")
+    presentator_email = blocks.EmailBlock(null=True, required=True, help_text="Important! Format ci@s.co")
+    presentator_link = blocks.URLBlock(null=True, required=True, help_text="Important! Format https://www.domain.tld/xyz")
 
     graphql_fields = [GraphQLString("presentator_name"), GraphQLString("presentator_link"),]
 
 @register_streamfield_block
 class _SE_AttendeeBlock(blocks.StructBlock):
-    attendee_name = blocks.CharBlock(null=True, blank=False, help_text="Name of the attendee")
-    attendee_email = blocks.EmailBlock(null=True, blank=True, help_text="Important! Format ci@s.co")
-    attendee_attendance = blocks.BooleanBlock(default=False, help_text="Whether the attendee was attending or not", required=True)
-    attendee_cache = blocks.TextBlock(null=True, blank=True, help_text="Other information")
+    attendee_name = blocks.CharBlock(null=True, required=False, help_text="Name of the attendee")
+    attendee_email = blocks.EmailBlock(null=True, required=False, help_text="Important! Format ci@s.co")
+    attendee_attendance = blocks.BooleanBlock(null=False, required=False, default=False, help_text="Whether the attendee was attending or not")
+    attendee_cache = blocks.TextBlock(null=True, required=False,  help_text="Other information")
 
     graphql_fields = [GraphQLString("attendee_name"), GraphQLString("attendee_email"), GraphQLBoolean("attendee_attendance"),]
 
@@ -57,15 +57,15 @@ class Session(models.Model):
     session_from = models.DateTimeField(null=True, blank=True)
     session_to = models.DateTimeField(null=True, blank=True)
     session_room = models.CharField(null=True, blank=True, max_length=32)
-    session_max_attendees = models.PositiveIntegerField(null=True, blank=False)
-    session_current_attendees = models.PositiveIntegerField(null=True, blank=False)
+    session_max_attendees = models.PositiveIntegerField(null=False, blank=False, default=16)
+    session_current_attendees = models.PositiveIntegerField(null=False, blank=False, default=0)
 
     session_presentators = StreamField([
-        ('se_presentator', _SE_PresentatorBlock(null=True, blank=False, icon='fa-id-badge')),
-    ], null=True, blank=False, )
+        ('se_presentator', _SE_PresentatorBlock(null=True, icon='fa-id-badge')),
+    ], null=True, blank=False)
 
     session_attendees = StreamField([
-        ('se_attendee', _SE_AttendeeBlock(null=True, blank=False, icon='fa-credit-card')),
+        ('se_attendee', _SE_AttendeeBlock(null=True, icon='fa-credit-card')),
     ], null=True, blank=True)
 
     session_cache = models.TextField(null=True, blank=True)

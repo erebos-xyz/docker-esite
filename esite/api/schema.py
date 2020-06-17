@@ -67,6 +67,9 @@ def create_schema():
             'revoke_token': graphql_jwt.Revoke.Field(),
             'session_cache': esite.session.schema.SaveSessionCache.Field(),
             'session_table': esite.session.schema.SaveSessionTable.Field(),
+            'session_add_attendee': esite.session.schema.SessionAddAttendee.Field(),
+            'session_remove_attendee': esite.session.schema.SessionRemoveAttendee.Field(),
+            'Session_check_attendance': esite.session.schema.SessionCheckAttendance.Field(),
         }
         dict_params.update((camel_case_to_spaces(n).replace(' ', '_'), mut.Field())
                            for n, mut in registry.forms.items())
