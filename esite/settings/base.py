@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # 'esite.registration',
     'esite.user',
     # 'esite.customer',
-    'esite.linuxday',
+    #'esite.linuxday',
     'esite.projekttage',
     # 'esite.profile',
     # 'esite.caching',
