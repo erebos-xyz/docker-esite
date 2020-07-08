@@ -25,9 +25,7 @@ from wagtail.core import urls as wagtail_urls
 
 from django.views.decorators.csrf import csrf_exempt
 from graphql_jwt.decorators import jwt_cookie
-from graphene_django.views import GraphQLView
 
-from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 
 from wagtail.images.views.serve import ServeView

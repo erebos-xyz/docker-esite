@@ -177,9 +177,9 @@ class Asharingan_TeamBlock(blocks.StructBlock):
 @register_streamfield_block
 class Asharingan_SharinganBlock(blocks.StructBlock):
     show_projects = blocks.BooleanBlock(default=True, help_text="Whether sh1, sh2, sh3 will be shown on this block", required=False, classname="full")
-    sharingan_1 = blocks.RichTextBlock(null=True, blank=False, classname="full")
-    sharingan_2 = blocks.RichTextBlock(null=True, blank=False, classname="full")
-    sharingan_3 = blocks.RichTextBlock(null=True, blank=False, classname="full")
+    sharingan1 = blocks.RichTextBlock(null=True, blank=False, classname="full")
+    sharingan2 = blocks.RichTextBlock(null=True, blank=False, classname="full")
+    sharingan3 = blocks.RichTextBlock(null=True, blank=False, classname="full")
 
     graphql_fields = [GraphQLBoolean("show_projects"), GraphQLString("sharingan_1"), GraphQLString("sharingan_2"), GraphQLString("sharingan_3")]
 
