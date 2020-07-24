@@ -116,7 +116,7 @@ class Session(models.Model):
         FieldPanel('session_cache'),
     ]
 
-    
+
     edit_handler = TabbedInterface([
         ObjectList(main_content_panels, heading='Main'),
     ])
